@@ -8,17 +8,32 @@
     <div class="card-body">
         <h2 class="mb-4 text-primary fw-bold">📋 Task List</h2>
 
+        <!-- 🔍 Search Form -->
+        @using (Html.BeginForm("Index", "TodoItems", FormMethod.Get))
+        {
+            <div class="input-group mb-3">
+                <input type="text" name="q" value="@ViewBag.CurrentFilter" class="form-control" placeholder="Search tasks by title or notes..." />
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </div>
+        }
+
+        <!-- Create Button -->
         <p>
             @Html.ActionLink("➕ Create New Task", "Create", null, new { @class = "btn btn-primary mb-3" })
         </p>
 
+        <!-- Task Table -->
         <table class="table table-bordered table-hover align-middle">
             <thead class="table-primary text-dark">
                 <tr>
-                    <th>Title</th>
+                    <th>
+                        @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSort, q = ViewBag.CurrentFilter })
+                    </th>
                     <th>Notes</th>
                     <th>Status</th>
-                    <th>Due Date</th>
+                    <th>
+                        @Html.ActionLink("Due Date", "Index", new { sortOrder = ViewBag.DateSort, q = ViewBag.CurrentFilter })
+                    </th>
                     <th>Created At</th>
                     <th style="width:220px;">Action</th>
                 </tr>
