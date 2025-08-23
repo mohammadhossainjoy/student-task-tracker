@@ -41,19 +41,19 @@ This project demonstrates industry-level Git workflow with **branching, pull req
 5.Press F5 to run → Default page will show Task List
 
 
-Task List
+# List Task
 <img width="959" height="440" alt="image" src="https://github.com/user-attachments/assets/3f016abb-d797-4378-b77d-8bcffb4acc38" />
 
-Create Task
+# Create Task
 <img width="959" height="437" alt="image" src="https://github.com/user-attachments/assets/430a1831-46ec-4d28-8bc5-6875fed954db" />
 
-Edit Task
+# Edit Task
 <img width="959" height="438" alt="image" src="https://github.com/user-attachments/assets/1b1dcd8b-225c-48e2-85b9-37b83463f724" />
 
-Details Task
+# Details Task
 <img width="959" height="439" alt="image" src="https://github.com/user-attachments/assets/7d26728d-b649-4aca-b5b1-1d45b6d4a27e" />
 
-Delete Task
+# Delete Task
 <img width="959" height="439" alt="image" src="https://github.com/user-attachments/assets/cbabdc52-110b-4c8a-ab43-cadc5686fb9c" />
 
 🧩 Future Improvements
