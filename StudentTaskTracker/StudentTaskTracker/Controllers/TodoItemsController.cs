@@ -15,9 +15,44 @@ namespace StudentTaskTracker.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: TodoItems
-        public ActionResult Index()
+        public ActionResult Index(string q, string sortOrder)
         {
-            return View(db.TodoItems.ToList());
+            // keep search text in the box
+            ViewBag.CurrentFilter = q;
+
+            // toggle sorting
+            ViewBag.TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewBag.DateSort = sortOrder == "date" ? "date_desc" : "date";
+
+            var items = db.TodoItems.AsQueryable();
+
+            // search filter
+            if (!String.IsNullOrWhiteSpace(q))
+            {
+                items = items.Where(t =>
+                    (t.Title != null && t.Title.Contains(q)) ||
+                    (t.Notes != null && t.Notes.Contains(q))
+                );
+            }
+
+            // ↕ sorting logic
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    items = items.OrderByDescending(t => t.Title);
+                    break;
+                case "date":
+                    items = items.OrderBy(t => t.DueDate);
+                    break;
+                case "date_desc":
+                    items = items.OrderByDescending(t => t.DueDate);
+                    break;
+                default:
+                    items = items.OrderBy(t => t.Title);
+                    break;
+            }
+
+            return View(items.ToList());
         }
 
         // GET: TodoItems/Details/5
@@ -42,8 +77,6 @@ namespace StudentTaskTracker.Controllers
         }
 
         // POST: TodoItems/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Notes,IsDone,DueDate,CreatedAt")] TodoItem todoItem)
@@ -54,7 +87,6 @@ namespace StudentTaskTracker.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(todoItem);
         }
 
@@ -74,8 +106,6 @@ namespace StudentTaskTracker.Controllers
         }
 
         // POST: TodoItems/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Notes,IsDone,DueDate,CreatedAt")] TodoItem todoItem)
