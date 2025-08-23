@@ -1,0 +1,26 @@
+name: .NET Framework CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore packages
+        run: nuget restore StudentTaskTracker.sln
+
+      - name: Build solution
+        run: msbuild StudentTaskTracker.sln /p:Configuration=Release
