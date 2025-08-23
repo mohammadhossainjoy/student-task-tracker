@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StudentTaskTracker.Models.TodoItem>
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+<div class="card shadow-lg border-0 rounded">
+    <div class="card-body">
+        <h2 class="mb-4 text-primary fw-bold">📋 Task List</h2>
+
+        <p>
+            @Html.ActionLink("➕ Create New Task", "Create", null, new { @class = "btn btn-primary mb-3" })
+        </p>
+
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-primary text-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Notes</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Created At</th>
+                    <th style="width:220px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@item.Title</td>
+                        <td>@item.Notes</td>
+                        <td>
+                            @if (item.IsDone)
+                            {
+                                <span class="badge bg-success px-3 py-2">✔ Completed</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark px-3 py-2">⏳ Pending</span>
+                            }
+                        </td>
+                        <td>@(item.DueDate.HasValue ? item.DueDate.Value.ToString("dd MMM yyyy") : "")</td>
+                        <td>@item.CreatedAt.ToString("dd MMM yyyy")</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-secondary" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

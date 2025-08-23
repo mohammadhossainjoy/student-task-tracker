@@ -1,0 +1,53 @@
+﻿@model StudentTaskTracker.Models.TodoItem
+
+@{
+    ViewBag.Title = "Create Task";
+}
+
+<div class="card shadow-lg border-0 rounded">
+    <div class="card-body">
+        <h2 class="text-primary mb-4">➕ Create New Task</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Title, new { @class = "form-label fw-bold" })
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Enter task title" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Notes, new { @class = "form-label fw-bold" })
+                @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", rows = 3, placeholder = "Enter task notes" })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-check mb-3">
+                @Html.CheckBoxFor(model => model.IsDone, new { @class = "form-check-input" })
+                @Html.LabelFor(model => model.IsDone, new { @class = "form-check-label fw-bold" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.DueDate, new { @class = "form-label fw-bold" })
+                @Html.TextBoxFor(model => model.DueDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.CreatedAt, new { @class = "form-label fw-bold" })
+                @Html.TextBoxFor(model => model.CreatedAt, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">💾 Save Task</button>
+            @Html.ActionLink("🔙 Back to List", "Index", null, new { @class = "btn btn-outline-secondary ms-2" })
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
