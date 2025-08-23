@@ -1,0 +1,49 @@
+﻿@model StudentTaskTracker.Models.TodoItem
+
+@{
+    ViewBag.Title = "Task Details";
+}
+
+<div class="card shadow-lg border-0 rounded">
+    <div class="card-body">
+        <h2 class="text-info mb-4">📖 Task Details</h2>
+
+        <dl class="row">
+            <dt class="col-sm-3 fw-bold">Title</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+
+            <dt class="col-sm-3 fw-bold">Notes</dt>
+            <dd class="col-sm-9">@Model.Notes</dd>
+
+            <dt class="col-sm-3 fw-bold">Status</dt>
+            <dd class="col-sm-9">
+                @if (Model.IsDone)
+                {
+                    <span class="badge bg-success">✔ Completed</span>
+                }
+                else
+                {
+                    <span class="badge bg-warning text-dark">⏳ Pending</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3 fw-bold">Due Date</dt>
+            <dd class="col-sm-9">
+                @if (Model.DueDate.HasValue)
+                {
+                    @Model.DueDate.Value.ToString("dd MMM yyyy")
+                }
+                else
+                {
+                    <span class="text-muted">Not set</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3 fw-bold">Created At</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("dd MMM yyyy")</dd>
+        </dl>
+
+        <a class="btn btn-outline-primary" href="@Url.Action("Edit", new { id = Model.Id })">✏ Edit</a>
+        @Html.ActionLink("🔙 Back to List", "Index", null, new { @class = "btn btn-outline-secondary ms-2" })
+    </div>
+</div>

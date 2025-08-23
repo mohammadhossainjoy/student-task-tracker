@@ -1,0 +1,36 @@
+﻿@model StudentTaskTracker.Models.TodoItem
+
+@{
+    ViewBag.Title = "Delete Task";
+}
+
+<div class="card shadow-lg border-0 rounded">
+    <div class="card-body">
+        <h2 class="text-danger mb-4">🗑 Delete Task</h2>
+        <p class="alert alert-warning"><strong>Are you sure?</strong> This action cannot be undone.</p>
+
+        <dl class="row">
+            <dt class="col-sm-3 fw-bold">Title</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+
+            <dt class="col-sm-3 fw-bold">Notes</dt>
+            <dd class="col-sm-9">@Model.Notes</dd>
+
+            <dt class="col-sm-3 fw-bold">Status</dt>
+            <dd class="col-sm-9">@(Model.IsDone ? "✔ Completed" : "⏳ Pending")</dd>
+
+            <dt class="col-sm-3 fw-bold">Due Date</dt>
+            <dd class="col-sm-9">@Model.DueDate?.ToString("dd MMM yyyy")</dd>
+
+            <dt class="col-sm-3 fw-bold">Created At</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("dd MMM yyyy")</dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">🗑 Confirm Delete</button>
+            @Html.ActionLink("🔙 Cancel", "Index", null, new { @class = "btn btn-outline-secondary ms-2" })
+        }
+    </div>
+</div>
