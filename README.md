@@ -57,16 +57,17 @@ This project demonstrates industry-level Git workflow with **branching, pull req
 <img width="959" height="439" alt="image" src="https://github.com/user-attachments/assets/cbabdc52-110b-4c8a-ab43-cadc5686fb9c" />
 
 🧩 Future Improvements
-Pagination & filtering
-User authentication (ASP.NET Identity)
-Deploy to Azure / IIS
-Unit tests integration
+1.Pagination & filtering
+2.User authentication (ASP.NET Identity)
+3.Deploy to Azure / IIS
+4.Unit tests integration
 
 🤝 Contributing
 Fork the repo
-Create your feature branch: git checkout -b feat/awesome-feature
-Commit changes: git commit -m "feat: add awesome feature"
-Push to branch: git push origin feat/awesome-feature
-Open a Pull Request
+1.Create your feature branch: 
+2.git checkout -b feat/awesome-feature
+3.Commit changes: git commit -m "feat: add awesome feature"
+4.Push to branch: git push origin feat/awesome-feature
+5.Open a Pull Request
 
-![Build Status](https://github.com/your-username/student-task-tracker/actions/workflows/dotnet-framework.yml/badge.svg)
+
